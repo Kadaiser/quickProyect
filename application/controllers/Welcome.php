@@ -22,6 +22,29 @@ class Welcome extends CI_Controller
      */
     public function loadtasks()
     {
-        echo $this->Taskmanagermodel->getTask();
+        echo json_encode($this->Taskmanagermodel->getTask());
+    }
+
+
+    /**
+     * Close a task
+     * @param int id
+     */
+    public function closeTask()
+    {
+        $id = isset($_POST["id"]) ? htmlspecialchars($_POST["id"]) : null;
+        echo json_encode($this->Taskmanagermodel->closeTask($id));
+    }
+
+    /**
+     * add a task
+     * @param string task
+     * @param int:array tags
+     */
+    public function addTask()
+    {
+        $task = isset($_POST["task"]) ? htmlspecialchars($_POST["task"]) : null;
+        $tags = isset($_POST["tags"]) ? $_POST["tags"] : array();
+        echo json_encode($this->Taskmanagermodel->addTask($task, $tags));
     }
 }
